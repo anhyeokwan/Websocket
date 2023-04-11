@@ -157,7 +157,7 @@
 			if(key.keyCode == 13){
 				sendMsg();
 			}
-		}) // 가보자고
+		}) // 가보자고 옼케옼케
 		
 	</script>
 </body>
