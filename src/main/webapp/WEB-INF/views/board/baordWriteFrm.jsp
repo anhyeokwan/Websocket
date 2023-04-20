@@ -83,7 +83,7 @@
 		<table border="1">
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="boardTitle"></td>
+				<td><input type="text" name="boardTitle" class="chk" id="title"></td>
 			</tr>
 			
 			<tr>
@@ -136,7 +136,7 @@
 			<tr>
 				<th>글쓰기</th>
 				<td>
-					<textarea name="boardContent"></textarea>
+					<textarea name="boardContent" class="chk" id="content"></textarea>
 				</td>
 			</tr>
 			
@@ -144,7 +144,7 @@
 				
 				<td colspan="3">
 					<input type="file" name="boardfile" multiple="multiple" style="display: none;">
-					<input type="submit" value="등록">
+					<button type="button" id="btn">등록</button>
 					<a href="/">메인페이지로</a>
 				</td>
 			</tr>
@@ -152,6 +152,47 @@
 	</form>
 	
 	<script type="text/javascript">
+		const regChk = /[<|>]/;
+		const regFirst = /^[<|>]/g;
+		
+		let titleBool;
+		$("#title").on("keyup", function(){
+			const titleVal = $("#title").val();
+			
+			if(regChk.test(titleVal)){
+				
+				titleBool = false;
+			}else{
+				titleBool = true;
+			}
+			console.log(titleBool);
+		})
+		
+		let contentBool;
+		$("#content").on("keyup", function(){
+			const contentVal = $("#content").val();
+			
+			if(regChk.test(contentVal)){
+				
+				contentBool = false;
+			}else{
+				contentBool = true;
+			}
+			console.log(contentBool);
+		})
+		
+		$("#btn").on("click", function () {
+			if(!titleBool){
+				alert("제목에는 <와 >가 들어갈 수 없습니다.");
+				$("#btn").attr("type", "button");
+			}else if(!contentBool){
+				alert("내용에는 <와 >가 들어갈 수 없습니다.");
+				$("#btn").attr("type", "button");
+			}else{
+				$("#btn").attr("type", "submit");
+			}
+		})
+	
 		const fileZone = $(".fileZone");
 		const files = new Array();
 		// 드래그영역에 들어올 때
